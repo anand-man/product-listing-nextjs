@@ -1,8 +1,12 @@
+import { NextResponse } from "next/server";
+
+export const runtime = "nodejs";
+
 export async function GET() {
   try {
     const res = await fetch("https://fakestoreapi.com/products");
     if (!res.ok) {
-      return Response.json(
+      return NextResponse.json(
         {
           error: "Failed to fetch products",
         },
@@ -12,9 +16,9 @@ export async function GET() {
       );
     }
     const data = await res.json();
-    return Response.json(data);
+    return NextResponse.json(data);
   } catch (error) {
-    return Response.json(
+    return NextResponse.json(
       {
         error: "Unable to fetch products from FakeAPIStore",
       },

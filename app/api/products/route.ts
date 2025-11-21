@@ -4,7 +4,9 @@ export const runtime = "nodejs";
 
 export async function GET() {
   try {
-    const res = await fetch("https://fakestoreapi.com/products");
+    const res = await fetch("https://fakestoreapi.com/products", {
+      headers: { "User-Agent": "Next.js App" },
+    });
     if (!res.ok) {
       return NextResponse.json(
         {

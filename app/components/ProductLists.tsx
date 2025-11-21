@@ -14,13 +14,13 @@ export default function ProductList() {
         const baseURL =
           process.env.NEXT_PUBLIC_BASE_URL ||
           (typeof window !== "undefined" ? window.location.origin : "");
-        setProducts([]);
         const res = await fetch(`${baseURL}/api/products`, {
           headers: { "Content-Type": "application/json" },
         });
         const data = await res.json();
         if (!res.ok) {
           setError(`${data.error}. Please try again.` as string);
+          setProducts([]);
           return;
         }
         setProducts(data);

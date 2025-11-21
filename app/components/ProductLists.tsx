@@ -11,7 +11,13 @@ export default function ProductList() {
   useEffect(() => {
     async function fetchProducts() {
       try {
-        const res = await fetch("/api/products");
+        const baseURL =
+          process.env.NEXT_PUBLIC_BASE_URL ||
+          (typeof window !== "undefined" ? window.location.origin : "");
+
+        const res = await fetch(`${baseURL}/api/products`, {
+          headers: { "Content-Type": "application/json" },
+        });
         const data = await res.json();
         if (!res.ok) {
           setError(data.error as string);

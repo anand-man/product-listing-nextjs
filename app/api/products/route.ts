@@ -1,6 +1,6 @@
 export async function GET() {
   try {
-    const res = await fetch("https://fakestoreapi.com/product");
+    const res = await fetch("https://fakestoreapi.com/products");
     if (!res.ok) {
       return Response.json(
         {

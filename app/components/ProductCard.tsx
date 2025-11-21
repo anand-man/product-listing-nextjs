@@ -8,6 +8,9 @@ export default function ProductCard({
 }: {
   product: ProductCardTypes;
 }) {
+  const addToCartHandler = (title: string) => {
+    alert(`${title} has been added to your cart1 :)`);
+  };
   return (
     <motion.div
       className="bg-background dark:bg-gray-900 shadow-md rounded p-4 flex flex-col cursor-pointer hover:shadow-xl transition-shadow duration-300"
@@ -49,6 +52,7 @@ export default function ProductCard({
           {product.rating?.count}/{product.rating?.rate}
         </span>
         <button
+          onClick={() => addToCartHandler(product.title)}
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 w-full transition-colors duration-300"
           aria-label={`View more details about ${product.title}`}
         >

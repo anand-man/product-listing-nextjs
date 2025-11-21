@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ProductCardTypes } from "../types/types";
 
 export default function ProductCard({
@@ -8,8 +9,10 @@ export default function ProductCard({
   product: ProductCardTypes;
 }) {
   return (
-    <div
-      className="max-w-sm mx-auto bg-blue dark:bg-gray-800 hover:shadow-lg transition-shadow duration-300 flex flex-col"
+    <motion.div
+      className="bg-background dark:bg-gray-900 shadow-md rounded p-4 flex flex-col cursor-pointer hover:shadow-xl transition-shadow duration-300"
+      whileHover={{ scale: 1.01 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
       aria-label={`Product card for ${product.title}`}
     >
       <div className="px-4 pb-4">
@@ -52,6 +55,6 @@ export default function ProductCard({
           Add to Cart
         </button>
       </div>
-    </div>
+    </motion.div>
   );
 }

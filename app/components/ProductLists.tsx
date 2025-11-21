@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "./ProductCard";
 import { ProductCardTypes } from "../types/types";
 import ProductCardSkeleton from "../utilities/ProductCardSkeleton";
@@ -32,27 +33,43 @@ export default function ProductList() {
     fetchProducts();
   }, []);
 
-  if (products === null) {
-    return (
-      <section className="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {Array.from({ length: 9 }).map((_, idx) => (
-          <ProductCardSkeleton key={idx} />
-        ))}
-      </section>
-    );
-  }
-
-  if (products.length === 0) {
-    return (
-      <>{error && <p className="text-center mt-8 text-red-500">{error}</p>}</>
-    );
-  }
-
   return (
-    <section className="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-      {products.map((product: ProductCardTypes) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </section>
+    <AnimatePresence>
+      {products === null ? (
+        <motion.section
+          className="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          {Array.from({ length: 9 }).map((_, idx) => (
+            <ProductCardSkeleton key={idx} />
+          ))}
+        </motion.section>
+      ) : products.length === 0 ? (
+        <motion.p
+          className="text-center mt-8 text-red-500"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          {error || "No products found."}
+        </motion.p>
+      ) : (
+        <motion.section
+          className="grid gap-6 p-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          initial="hidden"
+          animate="visible"
+          exit="hidden"
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.1 } },
+          }}
+        >
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </motion.section>
+      )}
+    </AnimatePresence>
   );
 }

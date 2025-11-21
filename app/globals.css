@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --bg-primary-blue: #155dfc;
 }
 
 @theme inline {
@@ -23,4 +24,19 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.product-listing-title {
+  position: relative;
+}
+
+.product-listing-title::after {
+  content: "";
+  position: absolute;
+  width: 65px;
+  height: 6px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--bg-primary-blue);
 }

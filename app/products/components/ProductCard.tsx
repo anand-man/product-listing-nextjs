@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ProductCardTypes } from "../types/types";
+import { ProductCardTypes } from "../../types/types";
+import Link from "next/link";
 
 export default function ProductCard({
   product,
@@ -18,24 +19,26 @@ export default function ProductCard({
       transition={{ duration: 0.3, ease: "easeOut" }}
       aria-label={`Product card for ${product.title}`}
     >
-      <div className="px-4 pb-4">
-        <figure className="w-full h-60">
-          <Image
-            src={product.image}
-            alt={product.title}
-            width={400}
-            height={250}
-            className="w-full h-48 object-contain"
-          />
-          <figcaption className="sr-only">{product.title}</figcaption>
-        </figure>
+      <Link href={`/products/${product.id}`} className="block group h-full">
+        <div className="px-4 pb-4">
+          <figure className="w-full h-60">
+            <Image
+              src={product.image}
+              alt={product.title}
+              width={400}
+              height={250}
+              className="w-full h-48 object-contain"
+            />
+            <figcaption className="sr-only">{product.title}</figcaption>
+          </figure>
 
-        <h2 className="text-xl font-bold mt-4">{product.title}</h2>
+          <h2 className="text-xl font-bold mt-4">{product.title}</h2>
 
-        <p className="text-sm text-gray-600 dark:text-gray-300 my-4">
-          {product.description}
-        </p>
-      </div>
+          <p className="text-sm text-gray-600 dark:text-gray-300 my-4">
+            {product.description}
+          </p>
+        </div>
+      </Link>
       <div className="actions mt-auto">
         <p className="mb-2 px-4">
           Price: ₹ {Math.floor((product.price || 0) * 85)}

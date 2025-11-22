@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "./ProductCard";
-import { ProductCardTypes } from "../types/types";
-import ProductCardSkeleton from "../utilities/ProductCardSkeleton";
+import { ProductCardTypes } from "../../types/types";
+import ProductCardSkeleton from "../../utilities/ProductCardSkeleton";
+import Link from "next/link";
 
 export default function ProductList() {
   const [products, setProducts] = useState<ProductCardTypes[] | null>(null);

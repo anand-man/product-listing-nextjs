@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { ProductCardTypes } from "../types/types";
+import { ProductCardTypes } from "../../types/types";
 import ProductCard from "./ProductCard";
 
 describe("ProductCard", () => {

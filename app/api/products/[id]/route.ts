@@ -8,9 +8,10 @@ export async function GET(
 ) {
   const resolvedParams = await params;
   const { id } = resolvedParams;
-  console.log("###id", id);
   try {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      headers: { "User-Agent": "Next.js App" },
+    });
     if (!res.ok) {
       console.error("Failed response:", res.status);
       return NextResponse.json(
